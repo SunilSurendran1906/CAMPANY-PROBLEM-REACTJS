@@ -1,25 +1,48 @@
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import Employees from "./components/Employees";
+import DataFetching from "./components/DataFetching";
 
-function App() {
+const DisplayAndCapitalize = ({ data }) => {
+  const capitalize = (str) => {
+    return str
+      .split(" ")
+      .map((word) => word.charAt(0) + word.slice(1))
+      .join(" ")
+      .toUpperCase();
+  };
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      {Object.keys(data).map((key) => (
+        <div key={key}>
+          <strong>{key}:</strong> {capitalize(data[key])}
+        </div>
+      ))}
     </div>
   );
-}
+};
+
+const App = () => {
+  const ex = {
+    name: "sesuraj",
+    designation: "senior software Engineer",
+    campany_name: "Book water Tech Pvt Ltd",
+    city: "Chennai",
+    Exp: "4+ Years",
+  };
+
+  return (
+    <div>
+      <h1>Employee</h1>
+      <DisplayAndCapitalize data={ex} />
+      <div>
+        <Employees />
+      </div>
+      <div>
+        <DataFetching />
+      </div>
+    </div>
+  );
+};
 
 export default App;
